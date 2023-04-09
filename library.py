@@ -107,10 +107,7 @@ class library(object):
         book_set = set()
         for i in self.users:
             for j in self.users[i]["loans"]:
-                try:
-                    book_set.add(j["title"])
-                except KeyError:
-                    pass
+                book_set.add(j["title"])
         for k in book_set:  # Lookup author name from books JSON
             result += f"Author: {self.books[k]['author']} /// Title: {k}\n"
         return result
@@ -135,6 +132,7 @@ class library(object):
 
     def delete_user(self, user_name):
         if user_name in self.users:
+            # Check if any books are still on loan
             for i in self.users[user_name]["loans"]:
                 if "end_date" not in i:
                     return 0
