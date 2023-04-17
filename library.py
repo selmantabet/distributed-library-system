@@ -131,11 +131,7 @@ class library(object):
         return 0
 
     def delete_user(self, user_name):
-        if user_name in self.users:
-            # Check if any books are still on loan
-            for i in self.users[user_name]["loans"]:
-                if "end_date" not in i:
-                    return 0
+        if (user_name in self.users) and (len(self.users[user_name]["loans"]) == 0):
             del self.users[user_name]
             return 1
         return 0
