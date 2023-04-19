@@ -92,7 +92,7 @@ class library(object):
 
     # Task 6
     def return_books_not_loan(self):
-        result = "Books Available: \n"
+        result = "Books available for loan: \n"
         for i in self.books:
             if self.books[i]["copies"] > 0:
                 result += f"Author: {self.books[i]['author']} /// Title: {i}\n"
@@ -110,7 +110,7 @@ class library(object):
 
     # Task 8
     def return_books_loan(self):
-        result = "Books Loaned: \n"
+        result = "Books currently on loan: \n"
         # The question did not mention showing the number of copies loaned. So set is in use.
         book_set = set()
         for i in self.users:
@@ -153,7 +153,7 @@ class library(object):
     def user_loans_date(self, user_name, start_year, start_month, start_day, end_year,
                         end_month, end_day):
         if user_name in self.users:
-            result = "Books Loaned: \n"
+            result = f"Books loaned between {datetime.date(start_year, start_month, start_day)} and {datetime.date(end_year, end_month, end_day)}: \n"
             for i in self.users[user_name]["loans"]:
                 if "end_date" in i:
                     if (i["start_date"] >= datetime.date(start_year, start_month, start_day)) and \
