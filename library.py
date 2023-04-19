@@ -115,7 +115,8 @@ class library(object):
         book_set = set()
         for i in self.users:
             for j in self.users[i]["loans"]:
-                book_set.add(j["title"])
+                if "end_date" not in j:  # Only show books that are not returned
+                    book_set.add(j["title"])
         for k in book_set:  # Lookup author name from books JSON
             result += f"Author: {self.books[k]['author']} /// Title: {k}\n"
         return result
