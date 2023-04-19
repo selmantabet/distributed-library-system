@@ -57,27 +57,32 @@ class library(object):
         """
         self.books = {}
 
+    # Task 1
     def add_user(self, user_name, user_number):
-        # Loan array would allow loans of same book
+        # Loan array would allow loans of the same book, sequentially stored
         self.users[user_name] = {"number": user_number, "loans": []}
         return
 
+    # Task 2
     def return_users(self):
         result = "Users Info: \n"
         for i in self.users:
             result += f"Name: {i} /// Number: {str(self.users[i]['number'])}\n"
         return result
 
+    # Task 3
     def add_author(self, author_name, author_genre):
         self.authors[author_name] = author_genre
         return 1
 
+    # Task 4
     def return_authors(self):
         result = "Authors Info: \n"
         for i in self.authors:
             result += f"Name: {i} /// Genre: {str(self.authors[i])}\n"
         return result
 
+    # Task 5
     def add_book_copy(self, author_name, book_title):
         if book_title in self.books:
             self.books[book_title]["copies"] += 1
@@ -85,6 +90,7 @@ class library(object):
             self.books[book_title] = {"author": author_name, "copies": 1}
         return 1
 
+    # Task 6
     def return_books_not_loan(self):
         result = "Books Available: \n"
         for i in self.books:
@@ -92,6 +98,7 @@ class library(object):
                 result += f"Author: {self.books[i]['author']} /// Title: {i}\n"
         return result
 
+    # Task 7
     def loan_book(self, user_name, book_title, year, month, day):
         if user_name in self.users:  # User may borrow more than one copy of the same book
             if (book_title in self.books) and (self.books[book_title]["copies"] > 0):
@@ -101,6 +108,7 @@ class library(object):
                 return 1
         return 0
 
+    # Task 8
     def return_books_loan(self):
         result = "Books Loaned: \n"
         # The question did not mention showing the number of copies loaned. So set is in use.
@@ -112,7 +120,9 @@ class library(object):
             result += f"Author: {self.books[k]['author']} /// Title: {k}\n"
         return result
 
+    # Task 9
     def end_book_loan(self, user_name, book_title, year, month, day):
+        # Note: Since multiple copies may be loaned, a serial number would be better to identify the exact copy of the book being returned. However, the question doesn't seem to warrant enforcing correct copy returns.
         if (user_name in self.users) and (book_title in self.books):
             for i in self.users[user_name]["loans"]:
                 if i["title"] == book_title:
@@ -124,18 +134,21 @@ class library(object):
                         return 1
         return 0
 
+    # Task 10
     def delete_book(self, book_title):
         if book_title in self.books:
             self.books[book_title]["copies"] = 0
             return 1
         return 0
 
+    # Task 11
     def delete_user(self, user_name):
         if (user_name in self.users) and (len(self.users[user_name]["loans"]) == 0):
             del self.users[user_name]
             return 1
         return 0
 
+    # Task 12
     def user_loans_date(self, user_name, start_year, start_month, start_day, end_year,
                         end_month, end_day):
         if user_name in self.users:
